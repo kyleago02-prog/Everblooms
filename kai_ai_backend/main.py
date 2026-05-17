@@ -84,8 +84,8 @@ class ChatResponse(BaseModel):
     session_id: str
 
 @app.get("/")
-def home():
-    return {"status": "working"}
+def root():
+    return {"message": "Kai AI Backend Running"}
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
