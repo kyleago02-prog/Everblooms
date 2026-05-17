@@ -260,7 +260,7 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
       
       http.Response response;
       try {
-        // Try local server first (e.g. 10.0.2.2 or localhost)
+        final isRender = backendUrl.contains("onrender.com");
         response = await _postWithRetry(
           backendUrl,
           headers: {
@@ -271,7 +271,7 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
             "message": text,
             "session_id": _sessionId,
           }),
-          maxAttempts: 2, // Try up to 2 times locally first
+          maxAttempts: isRender ? 1 : 2,
         );
       } catch (localError) {
         // If we are in debug mode and a local request failed (unreachable/timed out),
