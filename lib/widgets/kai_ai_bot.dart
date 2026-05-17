@@ -132,9 +132,9 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
   
   // 🌟 PRODUCTION HOSTING URL
   // Replace this placeholder with your actual hosted API production URL once deployed.
-  // For Render free tier: 'https://everblooms-kai-backend.onrender.com'
+  // For Render free tier: 'https://everblooms.onrender.com'
   // For Railway free/low-cost tier: 'https://your-app-name.up.railway.app'
-  static const String _prodBackendUrl = 'https://everblooms-kai-backend.onrender.com';
+  static const String _prodBackendUrl = 'https://everblooms.onrender.com';
 
   // For Android Physical Devices in local development:
   // Set this to 'http://localhost:8000' and run: `adb reverse tcp:8000 tcp:8000` on your PC.
