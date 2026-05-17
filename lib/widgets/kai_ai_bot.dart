@@ -142,32 +142,29 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
 
   // Automatic Backend URL Resolution
   String _getBackendUrl() {
-    // 1. Production / Release Builds
-    // Always use the stable cloud server so it works unplugged, on mobile data, or on any Wi-Fi.
-    if (kReleaseMode) {
-      return _prodBackendUrl;
-    }
+    // 🌟 SENIOR DEV DESIGN DECISION:
+    // To ensure the chatbot works flawlessly even when you unplug your laptop cable
+    // or run the app on the go, we default to the cloud backend (Render).
+    // Set this to true ONLY if you are actively editing the local Python backend on your PC.
+    const bool useLocalDevelopmentServer = false;
 
-    // 2. Development / Debug / Profile Builds
-    if (kIsWeb) {
-      return 'http://localhost:8000';
-    }
-
-    try {
-      if (Platform.isAndroid) {
-        // Physical Android devices can connect to your local PC IP over Wi-Fi, 
-        // or you can set this to _prodBackendUrl to debug directly against the cloud!
-        return _localDevIp;
-      }
-      if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+    if (useLocalDevelopmentServer && !kReleaseMode) {
+      if (kIsWeb) {
         return 'http://localhost:8000';
       }
-    } catch (e) {
-      // Fallback for platform checks in compiling contexts
+      try {
+        if (Platform.isAndroid) {
+          // Emulators default to 10.0.2.2. If on physical device with adb reverse, use localhost.
+          return 'http://10.0.2.2:8000';
+        }
+        return 'http://localhost:8000';
+      } catch (e) {
+        return 'http://localhost:8000';
+      }
     }
 
-    // Default development fallback
-    return 'http://127.0.0.1:8000';
+    // Default production cloud backend
+    return _prodBackendUrl;
   }
 
   // =========================================================================
