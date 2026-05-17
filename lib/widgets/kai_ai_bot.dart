@@ -140,13 +140,14 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
   // Set this to 'http://localhost:8000' and run: `adb reverse tcp:8000 tcp:8000` on your PC.
   static const String _localDevIp = 'http://localhost:8000';
 
+  // Set this to true ONLY if you are actively editing the local Python backend on your PC.
+  static bool useLocalDevelopmentServer = false;
+
   // Automatic Backend URL Resolution
   String _getBackendUrl() {
     // 🌟 SENIOR DEV DESIGN DECISION:
     // To ensure the chatbot works flawlessly even when you unplug your laptop cable
     // or run the app on the go, we default to the cloud backend (Render).
-    // Set this to true ONLY if you are actively editing the local Python backend on your PC.
-    bool useLocalDevelopmentServer = false;
 
     if (useLocalDevelopmentServer && !kReleaseMode) {
       if (kIsWeb) {
