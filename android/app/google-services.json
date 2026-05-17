@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "505391556627",
+    "project_id": "everbloom-a08b0",
+    "storage_bucket": "everbloom-a08b0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505391556627:android:547b1608d3df395994f7e6",
+        "android_client_info": {
+          "package_name": "com.example.everblooms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAVSye0IcCDuDkP4qo8FfsfKdwOxlMHow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
