@@ -182,7 +182,10 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
     required String body,
     int maxAttempts = 3,
     Duration initialDelay = const Duration(seconds: 1),
+    Duration? timeout,
   }) async {
+    final effectiveTimeout = timeout ?? 
+        (url.contains("onrender.com") ? const Duration(seconds: 75) : const Duration(seconds: 15));
     int attempt = 0;
     while (true) {
       attempt++;
@@ -192,7 +195,7 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
           Uri.parse(url),
           headers: headers,
           body: body,
-        ).timeout(const Duration(seconds: 12));
+        ).timeout(effectiveTimeout);
 
         // Return immediately if successful (200)
         if (response.statusCode == 200) {
