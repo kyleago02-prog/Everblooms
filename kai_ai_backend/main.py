@@ -84,12 +84,8 @@ class ChatResponse(BaseModel):
     session_id: str
 
 @app.get("/")
-def read_root():
-    return {
-        "status": "online",
-        "app": "EverBloom Kai AI Assistant Backend",
-        "model": MODEL_NAME
-    }
+def home():
+    return {"status": "working"}
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
@@ -173,5 +169,8 @@ def clear_chat(session_id: str = Body(..., embed=True)):
 
 if __name__ == "__main__":
     import uvicorn
-    # Default to 0.0.0.0 so we can access it from local emulator or local network
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    # Render binds to the PORT environment variable dynamically
+    port = int(os.getenv("PORT", 8000))
+    # Disable reload in production (when PORT is specified) for efficiency
+    is_prod = "PORT" in os.environ
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=not is_prod)
