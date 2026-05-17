@@ -151,16 +151,16 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
 
     if (useLocalDevelopmentServer && !kReleaseMode) {
       if (kIsWeb) {
-        return 'http://localhost:8000';
+        return _localDevIp;
       }
       try {
         if (Platform.isAndroid) {
           // Emulators default to 10.0.2.2. If on physical device with adb reverse, use localhost.
           return 'http://10.0.2.2:8000';
         }
-        return 'http://localhost:8000';
+        return _localDevIp;
       } catch (e) {
-        return 'http://localhost:8000';
+        return _localDevIp;
       }
     }
 
