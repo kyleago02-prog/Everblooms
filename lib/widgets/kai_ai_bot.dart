@@ -146,7 +146,7 @@ class _KaiAiBotState extends State<KaiAiBot> with TickerProviderStateMixin {
     // To ensure the chatbot works flawlessly even when you unplug your laptop cable
     // or run the app on the go, we default to the cloud backend (Render).
     // Set this to true ONLY if you are actively editing the local Python backend on your PC.
-    const bool useLocalDevelopmentServer = false;
+    bool useLocalDevelopmentServer = false;
 
     if (useLocalDevelopmentServer && !kReleaseMode) {
       if (kIsWeb) {
